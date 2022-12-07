@@ -1,0 +1,75 @@
+
+
+
+
+{% extends 'admin/adminheaderfooter.html' %}
+
+{% block content %}
+
+
+
+<!-- main content start -->
+<div class="main-content">
+
+    <!-- content -->
+    <div class="container-fluid content-top-gap">
+
+        <!-- breadcrumbs -->
+        <nav aria-label="breadcrumb" class="mb-4">
+            <ol class="breadcrumb my-breadcrumb">
+                <li class="breadcrumb-item"><a href="/adminindex/">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Forms</li>
+            </ol>
+        </nav>
+        <!-- //breadcrumbs -->
+        <!-- forms -->
+        <section class="forms">
+
+            <!-- forms 2 -->
+            <div class="card card_border py-2 mb-4">
+                <div class="card-body">
+                    <form action="/addproduct/?adminid={{x.id}}" method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="inputcatagory" class="input__label">Catagory</label>
+                            <input type="text" class="form-control input-style" name="catagory" id="inputcatagory">
+                        </div>
+                        <div class="form-group">
+                            <label for="inputmodelname" class="input__label">Productname</label>
+                            <input type="text" class="form-control input-style" name="product_name" id="inputmodelname">
+                        </div>
+                        <div class="form-group">
+                            <label for="inputprice" class="input__label">Price</label>
+                            <input type="text" class="form-control input-style" name="price" id="inputprice">
+                        </div>
+                        <div class="form-group">
+                            <label for="inputdetails" class="input__label">details</label>
+                            <input type="text" class="form-control input-style" name="details" id="inputdetails">
+                        </div>
+                        <div class="form-input">
+                            <input type="file" class="form-control input-style" name="img" id="img" placeholder=" *" required / >
+                        </div>
+                        
+
+
+                        
+                        <button type="submit" class="btn btn-primary btn-style mt-4">Add</button>
+                    </form>
+                </div>
+            </div>
+            <!-- //forms 2 -->
+
+            
+            
+        </section>
+        <!-- //forms -->
+        </section>
+        <!-- //forms  -->
+
+    </div>
+    <!-- //content -->
+
+</div>
+<!-- main content end-->
+</section>
+{% endblock %}

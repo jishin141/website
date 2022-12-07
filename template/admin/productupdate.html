@@ -1,0 +1,106 @@
+
+
+
+
+{% extends 'admin/adminheaderfooter.html' %}
+
+{% block content %}
+
+
+
+<!-- main content start -->
+<div class="main-content">
+
+    <!-- content -->
+    <div class="container-fluid content-top-gap">
+
+        <!-- breadcrumbs -->
+        <nav aria-label="breadcrumb" class="mb-4">
+            <ol class="breadcrumb my-breadcrumb">
+                <li class="breadcrumb-item"><a href="/adminindex/">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Forms</li>
+            </ol>
+        </nav>
+        <!-- //breadcrumbs -->
+        <!-- forms -->
+        <section class="forms">
+
+            <!-- forms 2 -->
+            <div class="card card_border py-2 mb-4">
+                <div class="card-body">
+                    {% for x in prd %}
+                    <form action="/productupdate/?adminid={{x.id}}" method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+
+                        <div class="form-group">
+                            <label for="inputcatagory" class="input__label">Catagory</label>
+                            <input type="text" class="form-control input-style" name="catagory" id="inputcatagory">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="inputmodelname" class="input__label">Productname</label>
+                            <input type="text" class="form-control input-style" name="product_name" value="{{x.product_name}}" id="inputmodelname">
+                        </div>
+                        <div class="form-group">
+                            <label for="inputprice" class="input__label">Price</label>
+                            <input type="text" class="form-control input-style" name="price" value="{{x.price}}" id="inputprice">
+                        </div>
+                        <div class="form-group">
+                            <label for="inputdetails" class="input__label">details</label>
+                            <input type="text" class="form-control input-style" name="details" value="{{x.details}}" id="inputdetails">
+                        </div>
+                         <div class="form-group" >
+                            <img src="{{x.img.url}}">
+                            
+                        </div>
+                        <div class="form-group">
+                            <label for="" class="input__label">Do you want to update Image </label>
+                            <input type="radio"  name="img" value="yes" id="chkYes" onchange="hide();">Yes &nbsp;
+                            <input type="radio"  name="img" value="no" id="" onchange="hide();" checked>No
+
+                        </div>
+                        <div class="form-input"  id="imgfile" style="display:none;">
+                            <input type="file" class="form-control input-style" name="imgfile" id="img" value=" "placeholder=" *"  />
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary btn-style mt-4">Update</button>
+                    </form>
+                    {% endfor %}
+                </div>
+            </div>
+            <!-- //forms 2 -->
+
+            
+            
+        </section>
+        <!-- //forms -->
+        </section>
+        <!-- //forms  -->
+
+    </div>
+    <!-- //content -->
+
+</div>
+<!-- main content end-->
+</section>
+<script type="text/javascript">
+        function hide(){
+            var chkYes = document.getElementById("chkYes");
+        var dvPassport = document.getElementById("imgfile");
+        
+
+
+        dvPassport.style.display = chkYes.checked ? "block" : "none";
+        if (chkYes.checked){
+            var img = document.getElementById("img").required = true;
+
+        }
+        else{
+            var img = document.getElementById("img").required = false;
+
+
+        }
+
+    }
+    </script>
+{% endblock %}

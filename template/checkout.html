@@ -1,0 +1,94 @@
+{% extends 'headerfooter.html' %}
+
+{% block content %}
+
+	
+	<!-- breadcrumb-section -->
+	<div class="breadcrumb-section breadcrumb-bg">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-8 offset-lg-2 text-center">
+					<div class="breadcrumb-text">
+						<h1>Check Out<span class="orange-text"> Product</span></h1>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- end breadcrumb section -->
+
+	<!-- check out section -->
+	<div class="checkout-section mt-150 mb-150">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-8">
+					<div class="checkout-accordion-wrap">
+						<div class="accordion" id="accordionExample">
+						  <div class="card single-accordion">
+						    <div class="card-header" id="headingOne">
+						      <h5 class="mb-0">
+						        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+						          Shipping Address
+						        </button>
+						      </h5>
+						    </div>
+
+						    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+						      <div class="card-body">
+						        <div class="billing-address-form">
+						        	<form action="/checkout/" method="POST" enctype="multipart/form-data">
+						        		{% csrf_token %}
+						        		<p><input type="text" name="fullname" placeholder="Name" required=""></p>
+						        		<p><input type="text" name="city" placeholder="city" required=""></p>
+						        		<p><input type="text" name="number" placeholder="number" required=""></p>
+						        		<p><input type="text" name="landmark" placeholder="landmark" required=""></p>
+						        		
+						        	</form>
+
+						        </div>
+						      </div>
+						      <input style="font-size: 10px;" type="submit" name="submit" value="place order" class="button btn" onclick="document.location='/checkout/'" />
+						    </div>
+						  </div>
+						  
+						</div>
+
+					</div>
+				</div>
+
+				<div class="col-lg-4">
+					<div class="order-details-wrap">
+						<table class="order-details">
+							<h2>Your order Details</h2>
+							<thead>
+								<tr>
+									<th>SL No.</th>
+									<th>Product</th>
+									<th>Price</th>
+								</tr>
+							</thead>
+							{% for x in datakey %}
+							<tbody class="order-details-body">
+						
+								<tr>
+									<td>{{forloop.counter}}</td>
+									<td>{{x.pid.product_name}}</td>
+									<td>{{x.totalprice}}</td>
+								</tr>
+								<tr>
+									<td></td>
+									<td>Total</td>
+									<td>{{total}}</td>
+								</tr>
+								{% endfor %}
+							</tbody>
+						</table>
+						
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- end check out section -->
+
+	{% endblock %}

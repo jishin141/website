@@ -1,0 +1,118 @@
+
+{% extends 'admin/adminheaderfooter.html' %}
+
+{% block content %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script >  
+function ajview()
+{
+  var d=document.getElementById('userid').value;
+
+  $.ajax({
+
+        url:'/view/',
+        data:
+        {
+          'p':d
+        },
+        datatype: 'json',
+        success: function(data)
+        {
+          document.getElementById("nameid").innerHTML=data.aa;
+          document.getElementById("emailid").innerHTML=data.bb;
+         
+
+
+        }
+
+
+      });
+}       
+</script> 
+
+
+
+<!-- main content start -->
+<div class="main-content">
+
+  <!-- content -->
+  <div class="container-fluid content-top-gap">
+
+    <!-- breadcrumbs -->
+    <nav aria-label="breadcrumb" class="mb-4">
+      <ol class="breadcrumb my-breadcrumb">
+        <li class="breadcrumb-item"><a href="/adminindex/">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Tables</li>
+      </ol>
+    </nav>
+    <!-- //breadcrumbs -->
+    
+    <!-- table  -->
+    <table class="table table-hover ">
+                <thead>
+                  <h1>User Details</h1>
+                <tr>
+                
+                 <th>Select user</th>
+               
+                 
+                 </tr>
+                 </thead>
+                 <tbody>
+                 
+                 <tr>
+                 
+                 <td><div class="form-group">
+                            <select class="custom-select input-style" required="" name="user" id="userid" onchange="ajview()">
+                              <option >Select </option>
+                              {% for x in user %}
+                                <option value="{{x.id}}">{{x.name}}</option>
+                              {% endfor %}
+                                
+                            </select>
+                            
+                        </div></td>
+                 
+                 
+                 </tr>
+                 
+                 </tbody>
+               </table>
+
+ 
+    <!-- //table -->
+
+  
+
+
+
+          <table class="table table-hover table-striped table-bordered">
+                <thead>
+                  <!-- <h1>User Details</h1> -->
+                <tr>
+                
+                 <th> name</th>
+                 <th> email</th>
+
+                 
+                 </tr>
+                 </thead>
+                 <tbody>
+                 
+                 <tr>
+                 
+                 <td id="nameid"></td>
+                 <td id="emailid"> </td>
+
+               
+                 </tr>
+                 
+                 </tbody>
+          </table>
+  </div>
+  <!-- //content -->
+
+</div>
+<!-- main content end-->
+</section>
+{% endblock %}

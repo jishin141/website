@@ -1,0 +1,82 @@
+{% extends 'headerfooter.html' %}
+
+{% block content %}
+
+	
+	<!-- breadcrumb-section -->
+	<div class="breadcrumb-section breadcrumb-bg">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-8 offset-lg-2 text-center">
+					<div class="breadcrumb-text">
+						
+						<h1>Cart</h1>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- end breadcrumb section -->
+
+	<!-- cart -->
+	<div class="product-sec1 px-sm-4 px-3 py-sm-3  py-3 mb-4 ">
+ <div class="container mt-4">
+             <!-- tittle heading -->
+			
+			{% if datakey %}
+                <table class="table table-hover table-striped table-bordered" style=" font-size:15px; text-align: center;">
+                <thead>
+                <tr>
+                	<th>Sno</th>
+                	<th>Image</th>
+                 <th>Product Name</th>
+                 <th>Quantity</th>
+                 <th>Price</th>
+                 <th>Remove</th>
+                 </tr>
+                 </thead>
+                 <tbody>
+                    {% for x in datakey %}
+                 <tr>
+                 <td>{{forloop.counter}}</td>
+                 <td><img src="{{x.pid.img.url}}" width="50px" height="50px" ></td>
+                 <td>{{x.pid.product_name}}</td>
+                 <td class="invert">
+							<div class="quantity">
+								<div class="quantity-select">
+								   <form action="/cartupdate/?cid={{x.id}}" method="POST" id="form-id">
+									{% csrf_token %}										
+										<div>
+											<input min="1" max="10" value="{{x.quantity}}" name="quantity"   type="number" >
+											<input  style="font-size: 10px;" type="submit" class="btn" value="update">	
+										</div>
+																				
+                           </form>
+								</div>
+					  </td>
+                 <td>{{x.totalprice}}</td>
+                 <td><a href="/deleteitem/?pid={{x.id}}">Remove</a></td>
+                 </tr>
+                 {% endfor %}
+                 </tbody>
+                 </table>
+                 <div class="checkout-right-basket" style="font-size: 10px;">
+						<input style="font-size: 10px;" type="submit" name="submit" value="buy now" class="button btn" onclick="document.location='/checkout/'" />
+                 </div>
+                 {% else %}
+                 <div class="text-center " style="font-size: 15px;" >
+                 	No items in cart 
+                 </div>
+                 <br>
+                 <div class="checkout-right-basket" style="text-align: center;">
+						<input style="font-size: 15px;" type="submit" name="submit" value="shop now" class="button btn" onclick="document.location='/shop/'" />
+                 </div>
+                 {% endif %}
+
+			</div>
+
+</div>
+
+	
+
+{% endblock %}

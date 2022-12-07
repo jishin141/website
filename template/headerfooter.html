@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Responsive Bootstrap4 Shop Template, Created by Imran Hossain from https://imransdesign.com/">
+
+	<!-- title -->
+	<title>Aigiri Herbals</title>
+
+	<!-- favicon -->
+	<link rel="shortcut icon" type="image/png" href="/static/assets/img/favicon.png">
+	<!-- google font -->
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Poppins:400,700&display=swap" rel="stylesheet">
+	<!-- fontawesome -->
+	<link rel="stylesheet" href="/static/assets/css/all.min.css">
+	<!-- bootstrap -->
+	<link rel="stylesheet" href="/static/assets/bootstrap/css/bootstrap.min.css">
+	<!-- owl carousel -->
+	<link rel="stylesheet" href="/static/assets/css/owl.carousel.css">
+	<!-- magnific popup -->
+	<link rel="stylesheet" href="/static/assets/css/magnific-popup.css">
+	<!-- animate css -->
+	<link rel="stylesheet" href="/static/assets/css/animate.css">
+	<!-- mean menu css -->
+	<link rel="stylesheet" href="/static/assets/css/meanmenu.min.css">
+	<!-- main style -->
+	<link rel="stylesheet" href="/static/assets/css/main.css">
+	<!-- responsive -->
+	<link rel="stylesheet" href="/static/assets/css/responsive.css">
+	<!-- jquery -->
+	<script src="/static/assets/js/jquery-1.11.3.min.js"></script>
+
+</head>
+<body>
+	
+	<!--PreLoader-->
+    <div class="loader">
+        <div class="loader-inner">
+            <div class="circle"></div>
+        </div>
+    </div>
+    <!--PreLoader Ends-->
+	
+	<!-- header -->
+	<div class="top-header-area" id="sticker">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12 col-sm-12 text-center">
+					<div class="main-menu-wrap">
+						<!-- logo -->
+						<div class="site-logo">
+							<a href="/">
+								<img src="/static/assets/img/logo1.png" alt="">
+							</a>
+						</div>
+						<!-- logo -->
+
+						<!-- menu start -->
+						<nav class="main-menu">
+							<ul>
+								<li id="index"><a href="/">Home</a>								
+								</li>
+								<li id="about"><a href="/about/">About</a></li>
+								<li id="news"><a href="/news/">News</a></li>
+								<li id="contact"><a href="/contact/">Contact</a></li>
+
+								<li id="shop"><a href="/shop/">Shop</a></li>
+								<li><a>More</a>
+			                  	<ul class="sub-menu">
+										{% if request.session.user_id %}
+            							<li class=" text-white">
+										   <a href="#" data-toggle="modal" data-target="#exampleModal"></a>
+										   <!-- <a  href="/logout/">Logout</a> -->
+                                        {% else %}
+                                        <li class=" text-white">
+						                <a href="#" data-toggle="modal" data-target="#exampleModal">
+								         Log In </a>
+						                </li>
+						                {% endif %}
+										<li class=" text-white">
+							               <a href="#" data-toggle="modal" data-target="#exampleModal2" >
+								               Register Now</a></li>
+										<!-- <li><a href="/shop/">Shop</a></li> -->
+										<li id="admin"> <a class="nav-link" href="/adminlogin/" >Admin</a></li>
+										
+									<!-- </ul> -->
+								</li>
+								
+						        </ul>
+						        {% if request.session.user_id %}
+								<li id="Logout"><a href="/logout/">Logout</a></li>
+								{% endif %}
+
+								<li>
+
+									<div class="header-icons">
+						        {% if request.session.user_id %}
+
+										<a class="shopping-cart" href="/cart/"><i class="fas fa-shopping-cart"></i></a>
+								{% endif %}
+										
+										<!-- <a class="mobile-hide search-bar-icon" href="#"><i class="fas fa-search"></i></a> -->
+									</div>
+
+								</li>
+							</ul>
+						</nav>
+						<!-- <a class="mobile-show search-bar-icon" href="#"><i class="fas fa-search"></i></a> -->
+						<div class="mobile-menu"></div>
+						<!-- menu end -->
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- end header -->
+
+	<!-- search area -->
+	<div class="search-area">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<span class="close-btn"><i class="fas fa-window-close"></i></span>
+					<div class="search-bar">
+						<div class="search-bar-tablecell">
+							<h3>Search For:</h3>
+							<input type="text" placeholder="Keywords">
+							<button type="submit">Search <i class="fas fa-search"></i></button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- end search arewa -->
+	<!-- register -->
+	<div class="modal" id="exampleModal2" tabindex="-1" role="dialog" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">Register</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<form action="/register/" method="POST">
+						{% csrf_token %}
+						<div class="form-group">
+							<label class="col-form-label">Your Name</label>
+							<input type="text" class="form-control" placeholder=" " name="Name" required="">
+						</div>
+						<div class="form-group">
+							<label class="col-form-label">Email</label>
+							<input type="email" class="form-control" placeholder=" " name="Email" required="">
+						</div>
+						<div class="form-group">
+							<label class="col-form-label">Password</label>
+							<input type="password" class="form-control" placeholder=" " name="Password" id="password" required="">
+						</div>
+						
+						<div class="right-w3l">
+							<input type="submit" class="form-control" value="Register">
+						</div>
+						<!-- <div class="sub-w3l">
+							<div class="custom-control custom-checkbox mr-sm-2">
+								<input type="checkbox" class="custom-control-input" id="customControlAutosizing2">
+								<label class="custom-control-label" for="customControlAutosizing2">I Accept to the Terms & Conditions</label>
+							</div>
+						</div> -->
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- //modal -->
+
+<!-- log in -->
+	<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5  class="modal-title text-center" style="padding: 10px;">Log In</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<form action="/login/" method="POST">
+						{% csrf_token %}
+						<div class="form-group">
+							<label class="col-form-label">Username</label>
+							<input type="text" class="form-control" placeholder=" " name="Name" required="">
+						</div>
+						<div class="form-group">
+							<label class="col-form-label">Password</label>
+							<input type="password" class="form-control" placeholder=" " name="Password" required="">
+						</div>
+						<div class="right-w3l">
+							<input  type="submit" class="form-control" value="Log in">
+						</div>
+						<div class="sub-w3l">
+							<div class="custom-control custom-checkbox mr-sm-2">
+								<input type="checkbox" class="custom-control-input" id="customControlAutosizing">
+								<label class="custom-control-label" for="customControlAutosizing">Remember me?</label>
+							</div>
+						</div>
+						<p class="text-center dont-do mt-3">Don't have an account?
+							<a href="#" data-toggle="modal" data-target="#exampleModal2">
+								Register Now</a>
+						</p>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+<!-- //login -->
+
+
+
+
+{% block content %}
+
+
+
+{% endblock %}
+
+
+<!-- logo carousel -->
+	<!-- <div class="logo-carousel-section">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="logo-carousel-inner">
+						<div class="single-logo-item">
+							<img src="/static/assets/img/1.png" alt="" style="img-fluid">
+						</div>
+						<div class="single-logo-item">
+							<img src="/static/assets/img/1.png" alt="">
+						</div>
+						<div class="single-logo-item">
+							<img src="/static/assets/img/1.png" alt="">
+						</div>
+						<div class="single-logo-item">
+							<img src="/static/assets/img/1.png" alt="">
+						</div>
+						<div class="single-logo-item">
+							<img src="/static/assets/img/1.png" alt="">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div> -->
+	<!-- end logo carousel -->
+<!-- footer -->
+	<div class="footer-area">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-4 col-md-6">
+					<div class="footer-box about-widget">
+						<h2 class="widget-title">About us</h2>
+						<p>Aigiri Herbals symbolizes quality with its authentic range of ayurvedic products and empowers its employees to expand their horizon beyond the unexpected.</p>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-6">
+					<div class="footer-box get-in-touch">
+						<h2 class="widget-title">Get in touch</h2>
+						<ul>
+							<li> sit voluptatem accusantium dolore mque laudantium</li>
+							<li>+00 111 222 3333</li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-lg-2 col-md-6">
+					<div class="footer-box pages">
+						<h2 class="widget-title">Pages</h2>
+						<ul>
+							<li><a href="/index/">Home</a></li>
+							<li><a href="/about/">About</a></li>
+							<!-- <li><a href="/shop/">Shop</a></li>
+							<li><a href="/news/">News</a></li> -->
+							<li><a href="/contact/">Contact</a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-lg-1 col-md-6">
+					<div class="footer-box pages">
+						<h2 class="widget-title">Explore</h2>
+						<ul>
+							<li><a href="/register/">Register</a></li>
+							<li><a href="/adminlogin/">Admin</a></li>
+							<li><a href="/login/">Login</a></li>
+						</ul>
+					</div>
+				</div>				
+			</div>
+		</div>
+	</div>
+	<!-- end footer -->
+	
+	<!-- copyright -->
+	<div class="copyright">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-6 col-md-12">
+					<p>Copyrights &copy; {% now "Y" %} - <a href="https://imransdesign.com/">Imran Hossain</a>,  All Rights Reserved.</p>
+				</div>
+				<!-- <div class="col-lg-6 text-right col-md-12">
+					<div class="social-icons">
+						<ul>
+							<li><a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
+							<li><a href="#" target="_blank"><i class="fab fa-twitter"></i></a></li>
+							<li><a href="#" target="_blank"><i class="fab fa-instagram"></i></a></li>
+							<li><a href="#" target="_blank"><i class="fab fa-linkedin"></i></a></li>
+							<li><a href="#" target="_blank"><i class="fab fa-dribbble"></i></a></li>
+						</ul>
+					</div>
+				</div> -->
+			</div>
+		</div>
+	</div>
+	<!-- end copyright -->
+	
+	
+	<!-- bootstrap -->
+	<script src="/static/assets/bootstrap/js/bootstrap.min.js"></script>
+	<!-- count down -->
+	<script src="/static/assets/js/jquery.countdown.js"></script>
+	<!-- isotope -->
+	<script src="/static/assets/js/jquery.isotope-3.0.6.min.js"></script>
+	<!-- waypoints -->
+	<script src="/static/assets/js/waypoints.js"></script>
+	<!-- owl carousel -->
+	<script src="/static/assets/js/owl.carousel.min.js"></script>
+	<!-- magnific popup -->
+	<script src="/static/assets/js/jquery.magnific-popup.min.js"></script>
+	<!-- mean menu -->
+	<script src="/static/assets/js/jquery.meanmenu.min.js"></script>
+	<!-- sticker js -->
+	<script src="/static/assets/js/sticker.js"></script>
+	<!-- main js -->
+	<script src="/static/assets/js/main.js"></script>
+
+</body>
+</html>

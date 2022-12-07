@@ -1,0 +1,89 @@
+{% extends 'headerfooter.html' %}
+
+{% block content %}
+
+	
+	<!-- breadcrumb-section -->
+	<div class="breadcrumb-section breadcrumb-bg">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-8 offset-lg-2 text-center">
+					<div class="breadcrumb-text">
+						<h1>Shop</h1>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- end breadcrumb section -->
+
+	<!-- products -->
+	<div class="product-section mt-150 mb-150">
+		<div class="container">
+
+			<div class="row">
+                <div class="col-md-12">
+                    <div class="product-filters">
+                        <ul>
+                            <li class="active">All</li>
+                            
+                        </ul>
+                    </div>
+                </div>
+            </div>
+              {% if hairoil %}
+			<div class="agileinfo-ads-display col-lg-9">
+					<div class="wrapper">
+					{% for x in hairoil %}
+					<div class="col-lg-4 col-md-6 text-center">
+									
+										<div class="men-thumb-item text-center">
+											<a href="/singleproduct/?pid={{x.id}}"><img src="{{x.img.url}}" alt="" width="450px" height="200px" ></a>
+											
+										</div>
+										<div class="item-info-product text-center border-top mt-4">
+											<h4 class="pt-1">
+												<a href="/singleproduct/?pid={{x.id}}">{{x.product_name}}</a>
+											</h4>
+											<div class="info-product-price my-2">
+												<span class="item_price"><b>&#x20b9 {{x.price}}</b></span>
+											</div>
+											
+											<div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
+												<form action="/addcart/" method="POST">
+													{% csrf_token %}
+													<fieldset>
+														<input type="hidden" name="pid" value="{{x.id}}" />
+														<!-- <input type="hidden" name="add" value="1" />
+														<input type="hidden" name="business" value=" " />
+														<input type="hidden" name="item_name" value="{{x.model_name}}" />
+														<input type="hidden" name="amount" value="{{x.price}}" />
+														<input type="hidden" name="discount_amount" value="1.00" />
+														<input type="hidden" name="currency_code" value="&#x20b9" />
+														<input type="hidden" name="return" value=" " />
+														<input type="hidden" name="cancel_return" value=" " /> -->
+														<input type="submit" name="submit" value="Add to cart" class="button btn" />
+													</fieldset>
+												</form>
+											</div>
+										</div>
+									</div>
+								</div>
+							{% endfor %}
+			</div>
+			{% else %}
+			{% endif %}
+
+		</div>
+	</div>
+	<!-- end products -->
+
+<script>
+$(document).ready(function(){
+ 
+    $("#shop").addClass(" current-list-item");
+  });
+
+</script>
+
+	{% endblock %}

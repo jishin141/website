@@ -1,0 +1,86 @@
+{% extends 'headerfooter.html' %}
+
+{% block content %}
+
+	
+	<!-- breadcrumb-section -->
+	<div class="breadcrumb-section breadcrumb-bg">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-8 offset-lg-2 text-center">
+					<div class="breadcrumb-text">
+						<p>See more Details</p>
+						<h1>Product Details</h1>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- end breadcrumb section -->
+
+	<!-- Single Page -->
+	<div class="banner-bootom-w3-agileits py-5" >
+		<div class="container py-xl-4 py-lg-2">
+			<!-- tittle heading -->
+			<h3 class="tittle-w3l text-center mb-lg-5 mb-sm-4 mb-3" >
+				{{x.product_name}}</h3>
+			<!-- //tittle heading -->
+			<div class="row">
+				{% for x in prd %}
+				<div class="col-lg-5 col-md-8 single-right-left ">
+					<div class="grid images_3_of_2">
+						<div class="flexslider">
+							<ul class="slides">
+								<li data-thumb="{{x.img.url}}">
+									<div class="thumb-image">
+										<img src="{{x.img.url}}" data-imagezoom="true" class="img-fluid" alt=""> </div>
+								</li>
+								
+							</ul>
+							<div class="clearfix"></div>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-lg-7 single-right-left simpleCart_shelfItem">
+					<h3 class="mb-3">{{x.product_name}}</h3>
+					<br>
+					<br>
+					<div >							
+						<ul>
+						<li>
+						<b>{{x.details}}</b>
+						</li>
+						</ul>
+						</div>
+					<br>
+					
+					<p class="mb-3">
+						<h4 class="item_price">&#x20b9 {{x.price}}</h4>
+						</p>
+					
+				    
+					<div class="occasion-cart">
+						<div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
+							<form action="/addcart/" method="POST">
+								{% csrf_token %}
+								<fieldset>
+									<input type="hidden" name="pid" value="{{x.id}}" />
+									
+									<input type="submit" name="submit" value="Add to cart" class="button" />
+								</fieldset>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- //Single Page -->
+{% endfor %}
+
+	
+
+	
+
+	{% endblock %}
